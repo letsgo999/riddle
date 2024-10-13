@@ -1,9 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 
 // 수수께끼 목록 (실제 앱에서는 더 많은 수수께끼를 추가하세요)
 const riddles = [
@@ -36,34 +33,37 @@ export default function RiddleApp() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto mt-10">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">수수께끼 앱</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
+      <h1 className="text-2xl font-bold text-center mb-6">수수께끼 앱</h1>
+      <div className="space-y-4">
         <p className="text-lg font-medium">{currentRiddle.question}</p>
-        <Input
+        <input
           type="text"
           placeholder="답을 입력하세요"
           value={userAnswer}
           onChange={(e) => setUserAnswer(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
         />
-        <Button onClick={checkAnswer} className="w-full">
+        <button
+          onClick={checkAnswer}
+          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+        >
           정답 확인
-        </Button>
+        </button>
         {result && (
           <p className={`text-center font-medium ${result.startsWith('정답') ? 'text-green-600' : 'text-red-600'}`}>
             {result}
           </p>
         )}
-      </CardContent>
-      <CardFooter>
-        {showNextButton && (
-          <Button onClick={nextRiddle} className="w-full">
-            다음 수수께끼
-          </Button>
-        )}
-      </CardFooter>
-    </Card>
+      </div>
+      {showNextButton && (
+        <button
+          onClick={nextRiddle}
+          className="w-full mt-4 bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
+        >
+          다음 수수께끼
+        </button>
+      )}
+    </div>
   )
 }
