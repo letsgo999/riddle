@@ -2,15 +2,19 @@
 
 import { useState } from 'react'
 
-// 수수께끼 목록 (실제 앱에서는 더 많은 수수께끼를 추가하세요)
-const riddles = [
+interface Riddle {
+  question: string;
+  answer: string;
+}
+
+const riddles: Riddle[] = [
   { question: "나는 날 수 있지만 새가 아닙니다. 나는 울 수 있지만 개가 아닙니다. 나는 무엇일까요?", answer: "비행기" },
   { question: "항상 오르지만 결코 내려오지 않는 것은 무엇일까요?", answer: "나이" },
   { question: "말을 할 수 있지만 입이 없고, 들을 수 있지만 귀가 없는 것은 무엇일까요?", answer: "전화기" },
 ]
 
 export default function RiddleApp() {
-  const [currentRiddle, setCurrentRiddle] = useState(riddles[Math.floor(Math.random() * riddles.length)])
+  const [currentRiddle, setCurrentRiddle] = useState<Riddle>(riddles[Math.floor(Math.random() * riddles.length)])
   const [userAnswer, setUserAnswer] = useState('')
   const [result, setResult] = useState<string | null>(null)
   const [showNextButton, setShowNextButton] = useState(false)
